@@ -49,6 +49,9 @@
     
   如果有什么问题，可以进行提问。
   
+## 相关文章
+
+  [微信消息关键字提醒](http://blog.csdn.net/CutelittleBo/article/details/71515006)
   
 ## 关于一些可能遇到的问题
 
