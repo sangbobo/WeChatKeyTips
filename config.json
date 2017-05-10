@@ -1,10 +1,10 @@
 {
   "mail_info": {
-    "host": "smtp.exmail.qq.com",
-    "account": "sangb@sdhehe.com",
-    "password": "SangBo123",
-    "sender": "sangb@sdhehe.com",
-    "receivers": "sangb@sdhehe.com"
+    "host": "smtp服务器",
+    "account": "邮箱账号",
+    "password": "密码",
+    "sender": "发送者邮箱账号",
+    "receivers": "接受者邮箱账号"
   },
   "keys":["桑博","所有人","通知","大家","全体"],
   "log_path":"out.txt"
