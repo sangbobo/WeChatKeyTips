@@ -7,6 +7,7 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 
+# 加载配置信息
 def load_config():
     f = open("config.json", encoding='utf-8')
     return json.load(f)
@@ -22,6 +23,7 @@ class WxMessage:
         self.type = type
         self.msg = msg
 
+# 获取配置信息
 config = load_config()
 
 mail_info = config['mail_info']
@@ -37,6 +39,7 @@ sender = mail_info['sender']
 receivers = mail_info['receivers']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
 
+# 注册普通消息
 @itchat.msg_register(TEXT)
 def friend_msg(msg):
     mg.name = msg.user.nickName
@@ -45,6 +48,7 @@ def friend_msg(msg):
     print_msg(mg)
 
 
+# 注册群聊消息
 @itchat.msg_register(TEXT, isGroupChat=True)
 def group_msg(msg):
     mg.name = msg.actualNickName
@@ -53,6 +57,7 @@ def group_msg(msg):
     print_msg(mg)
 
 
+# 打印到的消息
 def print_msg(mg):
 
     message_info = "发送类型：" + mg.type + "\n" + "发送人：" + mg.name + "\n" + "内容：" + mg.msg + "\n"
@@ -65,6 +70,7 @@ def print_msg(mg):
     print_log(message_info)
 
 
+# 如果匹配到消息，进行发送邮件
 def send_email(mg, message_info):
     message = MIMEText(message_info, 'plain', 'utf-8')
     message['From'] = Header(mg.type, 'utf-8')
@@ -82,11 +88,14 @@ def send_email(mg, message_info):
     print_log(info)
 
 
+# 输出日志到log
 def print_log(msg):
     msg = "\n" + msg
     f = open(config['log_path'], 'ab+')
     f.write(msg.encode("utf-8"))
     f.close()
 
+# 登陆微信
 itchat.auto_login(True)
+# 运行
 itchat.run(True)
